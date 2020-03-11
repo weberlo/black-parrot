@@ -106,6 +106,8 @@
      *    post-commit. However, for now we're passing all of it.                                   \
      */                                                                                            \
     bp_be_dep_status_s[4:0]                 dep_status;                                            \
+                                                                                                   \
+    logic                                   taken;                                                 \
   }  bp_be_calc_status_s;                                                                          \
                                                                                                    \
   typedef struct packed                                                                            \
@@ -182,6 +184,7 @@
    + vaddr_width_p                                                                                 \
    + 1                                                                                             \
    + 5 * `bp_be_dep_status_width                                                                   \
+   + 1                                                                                             \
    )                                                                                               
 
 `define bp_be_commit_pkt_width(vaddr_width_mp) \
