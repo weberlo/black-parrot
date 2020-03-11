@@ -222,6 +222,7 @@ bsg_dff
 
 // Computation pipelines
 // Integer pipe: 1 cycle latency
+logic taken;
 bp_be_pipe_int 
  #(.vaddr_width_p(vaddr_width_p))
  pipe_int
@@ -237,6 +238,8 @@ bp_be_pipe_int
    ,.data_o(pipe_int_data_lo)
    
    ,.br_tgt_o(br_tgt_int1)
+
+   ,.taken_o(taken)
    );
 
 // Multiplication pipe: 2 cycle latency
@@ -378,6 +381,7 @@ always_comb
     calc_status.ex1_npc                  = br_tgt_int1;
     calc_status.ex1_br_or_jmp            = reservation_r.decode.br_v | reservation_r.decode.jmp_v;
     calc_status.ex1_instr_v              = reservation_r.decode.instr_v & ~exc_stage_r[0].poison_v;
+    calc_status.taken                    = taken;
 
     // Dependency information for pipelines
     for (integer i = 0; i < pipe_stage_els_lp; i++) 
