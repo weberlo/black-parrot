@@ -40,13 +40,15 @@ typedef enum logic [3:0]
     logic [`BSG_SAFE_CLOG2(cce_block_width_p/8)-1:0]                           offset;             \
   }  bp_fe_itlb_vaddr_s;   
 
-`define declare_bp_fe_branch_metadata_fwd_s(btb_tag_width_mp, btb_idx_width_mp, bht_idx_width_mp, ras_idx_width_mp) \
+`define declare_bp_fe_branch_metadata_fwd_s(btb_tag_width_mp, btb_idx_width_mp, bht_idx_width_mp, ras_idx_width_mp, bht_global_history_length_mp) \
   typedef struct packed                                                                         \
   {                                                                                             \
     logic                           pred_taken;                                                 \
+    logic                           branch_dir;                                                 \
     logic [btb_tag_width_mp-1:0]    btb_tag;                                                    \
     logic [btb_idx_width_mp-1:0]    btb_idx;                                                    \
     logic [bht_idx_width_mp-1:0]    bht_idx;                                                    \
+    logic [bht_global_history_length_mp-1:0]   bht_global_history;                              \
     logic [ras_idx_width_mp-1:0]    ras_idx;                                                    \
   }  bp_fe_branch_metadata_fwd_s;
 
