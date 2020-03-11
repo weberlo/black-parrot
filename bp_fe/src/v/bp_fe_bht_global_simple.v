@@ -11,7 +11,7 @@
  */
 module bp_fe_bht_global_simple
   import bp_fe_pkg::*;
-   #(parameter global_history_length_p = 14
+   #(parameter global_history_length_p
 
      , localparam saturation_size_lp = 2
      , localparam els_lp             = 2**global_history_length_p

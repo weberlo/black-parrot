@@ -108,6 +108,7 @@ typedef struct packed
   integer btb_tag_width;
   integer btb_idx_width;
   integer bht_idx_width;
+  integer bht_global_history_length;
   integer ras_idx_width;
 
   integer itlb_els;
@@ -197,6 +198,7 @@ typedef struct packed
   , localparam btb_tag_width_p             = proc_param_lp.btb_tag_width                           \
   , localparam btb_idx_width_p             = proc_param_lp.btb_idx_width                           \
   , localparam bht_idx_width_p             = proc_param_lp.bht_idx_width                           \
+  , localparam bht_global_history_length_p = proc_param_lp.bhd_global_history_length               \
   , localparam ras_idx_width_p             = proc_param_lp.ras_idx_width                           \
                                                                                                    \
   , localparam itlb_els_p              = proc_param_lp.itlb_els                                    \
