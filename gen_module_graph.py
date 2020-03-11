@@ -21,6 +21,7 @@
 # 	"7th Edition" -> "UniPlus+";
 # 	"V7M" -> "Ultrix-11";
 # 	"8th Edition" -> "9th Edition";
+# 	node [color=pink, style=filled];
 # 	"1 BSD" -> "2 BSD";
 # 	"2 BSD" -> "2.8 BSD";
 # 	"2.8 BSD" -> "Ultrix-11";
@@ -59,9 +60,22 @@
 
 import os
 
-# base_file_name = "bp_fe/src/v/bp_fe_top.v"
+def get_graph_nodes(graph):
+    graph_nodes = set()
+    for (node, children) in graph.items():
+        graph_nodes.add(node)
+        graph_nodes |= children
+    return graph_nodes
+
+
 base_mod_name = 'bp_fe_top'
 base_file_name = "bp_fe/src/v/bp_fe_top.v"
+
+# base_mod_name = 'bp_be_top'
+# base_file_name = "bp_be/src/v/bp_be_top.v"
+
+# base_mod_name = 'bp_uce'
+# base_file_name = "bp_me/src/v/cce/bp_uce.v"
 
 bp_mod_to_path = {}
 for (dirpath, dirnames, filenames) in os.walk(os.path.dirname(base_file_name)):
@@ -84,6 +98,7 @@ while True:
                 line = line.strip()
                 if not line or line[0] in ('/', '*'):
                     continue
+                # check for black parrot mods
                 for mod in bp_mod_to_path.keys():
                     if line == mod:
                         mod_path = bp_mod_to_path[mod]
@@ -91,11 +106,12 @@ while True:
                         if mod not in seen:
                             to_visit.append((mod, mod_path))
                             seen.add(mod)
+                # check for bsg mods
+                if line.startswith('bsg_'):
+                    mod = line.split(' ')[0]
+                    graph[curr_mod].add(mod)
     # run until no orphans
-    graph_nodes = set()
-    for (node, children) in graph.items():
-        graph_nodes.add(node)
-        graph_nodes |= children
+    graph_nodes = get_graph_nodes(graph)
     orphans = set(bp_mod_to_path.keys()) - graph_nodes
     if orphans:
         new_root = orphans.pop()
@@ -107,7 +123,18 @@ while True:
 
 print(f'digraph {base_mod_name} {{')
 print('\tsize="500,500";')
+
 print('\tnode [color=lightblue2, style=filled];')
+graph_nodes = get_graph_nodes(graph)
+for node in graph_nodes:
+    if node.startswith('bp_'):
+        print(f'\t"{node}";')
+
+print('\tnode [color=pink, style=filled];')
+for node in graph_nodes:
+    if node.startswith('bsg_'):
+        print(f'\t"{node}";')
+
 for node in graph:
     children = graph[node]
     if children:
