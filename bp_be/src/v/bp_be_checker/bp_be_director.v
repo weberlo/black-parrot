@@ -288,6 +288,7 @@ always_comb
         fe_cmd.vaddr                                     = expected_npc_o;
         fe_cmd_pc_redirect_operands.subopcode            = e_subop_branch_mispredict;
         fe_cmd_pc_redirect_operands.branch_metadata_fwd  = isd_status.isd_branch_metadata_fwd;
+        fe_cmd_pc_redirect_operands.branch_metadata_fwd.branch_dir = calc_status.taken;
         // TODO: Add not a branch case
         fe_cmd_pc_redirect_operands.misprediction_reason = last_instr_was_branch
                                                            ? e_incorrect_prediction
@@ -302,6 +303,7 @@ always_comb
         fe_cmd.opcode                      = e_op_attaboy;
         fe_cmd.vaddr                       = expected_npc_o;
         fe_cmd.operands.attaboy.branch_metadata_fwd = isd_status.isd_branch_metadata_fwd;
+        fe_cmd.operands.attaboy.branch_metadata_fwd.branch_dir = calc_status.taken;
 
         fe_cmd_v = fe_cmd_ready_i;
       end
