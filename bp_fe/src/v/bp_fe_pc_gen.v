@@ -276,19 +276,24 @@ bp_fe_btb
    ,.br_tgt_i(fe_cmd_cast_i.vaddr)
    );
 
+   // Get the global history out.
+   logic [bht_global_history_length_p-1:0] bht_global_history_lo;
 logic bht_pred_lo;
-bp_fe_bht
- #(.bht_idx_width_p(bht_idx_width_p))
+bp_fe_bht_global_simple
+   #(.global_history_length_p(bht_global_history_length_p))
  bp_fe_bht
   (.clk_i(clk_i)
    ,.reset_i(reset_i)
 
    ,.r_v_i(1'b1)
-   ,.idx_r_i(fe_queue_cast_o_branch_metadata.bht_idx)
+   ,.history_r_o(bht_global_history_lo)
    ,.predict_o(bht_pred_lo)
 
    ,.w_v_i((br_res_v | attaboy_v) & fe_cmd_yumi_o)
-   ,.idx_w_i(fe_cmd_branch_metadata.bht_idx)
+   ,.history_w_i(fe_cmd_branch_metadata.bht_global_history)
+    // TODO(gus) have to get the actual direction that the branch went.
+    // need to make sure we can actually get this from the backend.
+   ,.actual_i(fe_cmd_branch_metadata.branch_dir)
    ,.correct_i(attaboy_v)
    );
 
@@ -371,6 +376,7 @@ always_comb
         fe_queue_cast_o.msg.fetch.pc                  = pc_if2;
         fe_queue_cast_o.msg.fetch.instr               = mem_resp_cast_i.data;
         fe_queue_cast_o.msg.fetch.branch_metadata_fwd = fe_queue_cast_o_branch_metadata_r;
+        fe_queue_cast_o.msg.fetch.branch_metadata_fwd.bht_global_history = bht_global_history_lo;
       end
   end
 
