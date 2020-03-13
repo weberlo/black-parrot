@@ -64,6 +64,7 @@ module bp_be_director
   );
 
 // Declare parameterized structures
+`declare_bp_fe_branch_metadata_fwd_s(btb_tag_width_p, btb_idx_width_p, bht_idx_width_p,ras_idx_width_p, bht_global_history_length_p);
 `declare_bp_cfg_bus_s(vaddr_width_p, core_id_width_p, cce_id_width_p, lce_id_width_p, cce_pc_width_p, cce_instr_width_p);
 `declare_bp_fe_be_if(vaddr_width_p, paddr_width_p, asid_width_p, branch_metadata_fwd_width_p);
 `declare_bp_be_internal_if_structs(vaddr_width_p, paddr_width_p, asid_width_p, branch_metadata_fwd_width_p); 
@@ -204,6 +205,10 @@ always_ff @(posedge clk_i)
 
 assign suppress_iss_o = (state_r == e_fence) & fe_cmd_fence_i;
 
+bp_fe_branch_metadata_fwd_s branch_metadata_fwd_cast;
+assign branch_metadata_fwd_cast = fe_cmd_pc_redirect_operands.branch_metadata_fwd;
+assign branch_metadata_fwd_cast.branch_dir = calc_status.taken;
+
 // Flush on FE cmds which are not attaboys.  Also don't flush the entire pipeline on a mispredict.
 always_comb 
   begin : fe_cmd_adapter
@@ -287,8 +292,7 @@ always_comb
         fe_cmd.opcode                                    = e_op_pc_redirection;
         fe_cmd.vaddr                                     = expected_npc_o;
         fe_cmd_pc_redirect_operands.subopcode            = e_subop_branch_mispredict;
-        fe_cmd_pc_redirect_operands.branch_metadata_fwd  = isd_status.isd_branch_metadata_fwd;
-        fe_cmd_pc_redirect_operands.branch_metadata_fwd.branch_dir = calc_status.taken;
+        fe_cmd_pc_redirect_operands.branch_metadata_fwd  = branch_metadata_fwd_cast;
         // TODO: Add not a branch case
         fe_cmd_pc_redirect_operands.misprediction_reason = last_instr_was_branch
                                                            ? e_incorrect_prediction
@@ -302,8 +306,7 @@ always_comb
       begin
         fe_cmd.opcode                      = e_op_attaboy;
         fe_cmd.vaddr                       = expected_npc_o;
-        fe_cmd.operands.attaboy.branch_metadata_fwd = isd_status.isd_branch_metadata_fwd;
-        fe_cmd.operands.attaboy.branch_metadata_fwd.branch_dir = calc_status.taken;
+        fe_cmd.operands.attaboy.branch_metadata_fwd = branch_metadata_fwd_cast;
 
         fe_cmd_v = fe_cmd_ready_i;
       end
