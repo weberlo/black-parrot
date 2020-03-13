@@ -353,6 +353,14 @@ assign fe_cmd_yumi_o      = fe_cmd_v_i; // Always accept FE commands
 
 // Organize the FE queue message
 assign fe_queue_v_o = fe_queue_ready_i & (fe_instr_v | fe_exception_v);
+
+bp_fe_branch_metadata_fwd_s fe_queue_cast_o_branch_metadata_r_with_global_history;
+always_comb
+  begin
+    fe_queue_cast_o_branch_metadata_r_with_global_history = fe_queue_cast_o_branch_metadata_r;
+    fe_queue_cast_o_branch_metadata_r_with_global_history.bht_global_history = bht_global_history_lo;
+  end
+
 always_comb
   begin
     // Set padding to 0
@@ -375,8 +383,7 @@ always_comb
         fe_queue_cast_o.msg_type                      = e_fe_fetch;
         fe_queue_cast_o.msg.fetch.pc                  = pc_if2;
         fe_queue_cast_o.msg.fetch.instr               = mem_resp_cast_i.data;
-        fe_queue_cast_o.msg.fetch.branch_metadata_fwd = fe_queue_cast_o_branch_metadata_r;
-        fe_queue_cast_o.msg.fetch.branch_metadata_fwd.bht_global_history = bht_global_history_lo;
+        fe_queue_cast_o.msg.fetch.branch_metadata_fwd = fe_queue_cast_o_branch_metadata_r_with_global_history;
       end
   end
 
