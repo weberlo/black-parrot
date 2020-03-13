@@ -206,8 +206,11 @@ always_ff @(posedge clk_i)
 assign suppress_iss_o = (state_r == e_fence) & fe_cmd_fence_i;
 
 bp_fe_branch_metadata_fwd_s branch_metadata_fwd_cast;
-assign branch_metadata_fwd_cast = fe_cmd_pc_redirect_operands.branch_metadata_fwd;
-assign branch_metadata_fwd_cast.branch_dir = calc_status.taken;
+always_comb
+  begin
+    branch_metadata_fwd_cast = fe_cmd_pc_redirect_operands.branch_metadata_fwd;
+    branch_metadata_fwd_cast.branch_dir = calc_status.taken;
+  end
 
 // Flush on FE cmds which are not attaboys.  Also don't flush the entire pipeline on a mispredict.
 always_comb 
