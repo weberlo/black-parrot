@@ -47,7 +47,6 @@ typedef enum logic [3:0]
     logic                           branch_dir;                                                 \
     logic [btb_tag_width_mp-1:0]    btb_tag;                                                    \
     logic [btb_idx_width_mp-1:0]    btb_idx;                                                    \
-    logic [bht_idx_width_mp-1:0]    bht_idx;                                                    \
     logic [bht_global_history_length_mp-1:0]   bht_global_history;                              \
     logic [ras_idx_width_mp-1:0]    ras_idx;                                                    \
   }  bp_fe_branch_metadata_fwd_s;
@@ -65,8 +64,8 @@ typedef enum logic [3:0]
 `define bp_fe_instr_scan_width(vaddr_width_mp) \
   (vaddr_width_mp + $bits(bp_fe_instr_scan_class_e))
 
-`define bp_fe_branch_metadata_fwd_width(btb_tag_width_mp, btb_idx_width_mp, bht_idx_width_mp, ras_idx_width_mp) \
-  (1 + btb_tag_width_mp + btb_idx_width_mp + bht_idx_width_mp + ras_idx_width_mp)
+`define bp_fe_branch_metadata_fwd_width(btb_tag_width_mp, btb_idx_width_mp, bht_idx_width_mp, ras_idx_width_mp, bht_global_history_length_mp) \
+  (1 + 1 + btb_tag_width_mp + btb_idx_width_mp + bht_idx_width_mp + bht_global_history_length_mp + ras_idx_width_mp)
 
 `define bp_fe_pc_gen_stage_width(vaddr_width_mp) \
   (3 + vaddr_width_mp)

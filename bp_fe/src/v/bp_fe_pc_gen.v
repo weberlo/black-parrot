@@ -230,13 +230,11 @@ bp_fe_branch_metadata_fwd_s fe_queue_cast_o_branch_metadata, fe_queue_cast_o_bra
 wire                    pred_taken_if2 = pc_gen_stage_r[1].pred_taken;
 wire [btb_tag_width_p-1:0] btb_tag_if2 = pc_if2[2+btb_idx_width_p+:btb_tag_width_p];
 wire [btb_idx_width_p-1:0] btb_idx_if2 = pc_if2[2+:btb_idx_width_p];
-wire [bht_idx_width_p-1:0] bht_idx_if2 = 0; //pc_if2[2+:bht_idx_width_p];
 
 assign fe_queue_cast_o_branch_metadata = 
   '{pred_taken: pred_taken_if2
     ,btb_tag  : btb_tag_if2
     ,btb_idx  : btb_idx_if2
-    ,bht_idx  : bht_idx_if2
     ,default  : '0
     };
 
