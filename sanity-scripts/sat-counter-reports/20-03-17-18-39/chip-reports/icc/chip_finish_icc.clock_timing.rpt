@@ -1,0 +1,21 @@
+ 
+****************************************
+Report : clock timing
+        -type skew
+        -nworst 1
+        -setup
+Design : bp_softcore
+Version: M-2016.12-SP5-3
+Date   : Tue Mar 17 20:18:07 2020
+****************************************
+
+  Clock: core_clk
+  Clock Pin                              Latency    CRP      Skew
+----------------------------------------------------------------------------
+  core/fe/mem/icache/tag_tv_r_reg_5__11_/CLK
+                                         0.46                          wrp-+
+  core/fe/mem/icache/tag_tv_r_reg_1__12_/CLK
+                                         0.32      -0.00     0.14      wrp-+
+----------------------------------------------------------------------------
+
+1

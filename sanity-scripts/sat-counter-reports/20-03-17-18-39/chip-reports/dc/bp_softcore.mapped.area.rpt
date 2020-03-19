@@ -1,0 +1,37 @@
+report_area -nosplit                                                                   
+ 
+****************************************
+Report : area
+Design : bp_softcore
+Version: O-2018.06-SP4
+Date   : Tue Mar 17 18:54:26 2020
+****************************************
+
+Library(s) Used:
+
+    saed90nm_typ (File: /home/projects/vlsi/common/ee477/kits/wi18/saed-90nm/stdview/stdcells.db)
+    saed90_16x64_1P_bit (File: /home/weberlo/final-project/ee477-chip/memories/saed90_16x64_1P_bit/saed90_16x64_1P_bit.db)
+    saed90_64x512_1P_BM (File: /home/weberlo/final-project/ee477-chip/memories/saed90_64x512_1P_BM/saed90_64x512_1P_BM.db)
+    saed90_248x64_1P_bit (File: /home/weberlo/final-project/ee477-chip/memories/saed90_248x64_1P_bit/saed90_248x64_1P_bit.db)
+    saed90_64x32_2P (File: /home/weberlo/final-project/ee477-chip/memories/saed90_64x32_2P/saed90_64x32_2P.db)
+    saed90_8x64_1P_bit (File: /home/weberlo/final-project/ee477-chip/memories/saed90_8x64_1P_bit/saed90_8x64_1P_bit.db)
+
+Number of ports:                        85685
+Number of nets:                        126949
+Number of cells:                        61280
+Number of combinational cells:          47215
+Number of sequential cells:             12443
+Number of macros/black boxes:              22
+Number of buf/inv:                       7628
+Number of references:                      22
+
+Combinational area:             444827.754208
+Buf/Inv area:                    43473.716274
+Noncombinational area:          309628.104965
+Macro/Black Box area:          1677249.770874
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:               2431705.630047
+Total area:                 undefined
+
+
