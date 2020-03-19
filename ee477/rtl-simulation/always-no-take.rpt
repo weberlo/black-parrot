@@ -1,0 +1,117 @@
+bs
+==========
+[CORE0 FSH] PASS
+[CORE0 STATS]
+	clk   :                 1147
+	instr :                  403
+	fe_nop:                    0
+	be_nop:                    0
+	me_nop:                    0
+	poison:                  661
+	roll  :                   12
+	mIPC  :                  351
+
+dijkstra
+==========
+[CORE0 FSH] PASS
+[CORE0 STATS]
+	clk   :              4557868
+	instr :              3082209
+	fe_nop:                    0
+	be_nop:                    0
+	me_nop:                    0
+	poison:              1254944
+	roll  :                  489
+	mIPC  :                  676
+
+fibcall
+==========
+[CORE0 FSH] PASS
+[CORE0 STATS]
+	clk   :                 2815
+	instr :                 1003
+	fe_nop:                    0
+	be_nop:                    0
+	me_nop:                    0
+	poison:                 1411
+	roll  :                    9
+	mIPC  :                  356
+
+frac
+==========
+[CORE0 FSH] PASS
+[CORE0 STATS]
+	clk   :              1916363
+	instr :               698043
+	fe_nop:                    0
+	be_nop:                    0
+	me_nop:                    0
+	poison:              1133249
+	roll  :                   42
+	mIPC  :                  364
+
+median
+==========
+[CORE0 FSH] PASS
+[CORE0 STATS]
+	clk   :                25347
+	instr :                 8778
+	fe_nop:                    0
+	be_nop:                    0
+	me_nop:                    0
+	poison:                14016
+	roll  :                  240
+	mIPC  :                  346
+
+rv64ui-p-blt
+==========
+[CORE0 FSH] PASS
+[CORE0 STATS]
+	clk   :                  886
+	instr :                  268
+	fe_nop:                    0
+	be_nop:                    0
+	me_nop:                    0
+	poison:                  582
+	roll  :                    0
+	mIPC  :                  302
+
+sglib-arraybinsearch
+==========
+[CORE0 FSH] PASS
+[CORE0 STATS]
+	clk   :                92785
+	instr :                45597
+	fe_nop:                    0
+	be_nop:                    0
+	me_nop:                    0
+	poison:                40651
+	roll  :                   33
+	mIPC  :                  491
+
+towers
+==========
+[CORE0 FSH] PASS
+[CORE0 STATS]
+	clk   :                17746
+	instr :                12390
+	fe_nop:                    0
+	be_nop:                    0
+	me_nop:                    0
+	poison:                 4783
+	roll  :                   42
+	mIPC  :                  698
+
+vvadd
+==========
+[CORE0 FSH] PASS
+[CORE0 STATS]
+	clk   :                14085
+	instr :                 6738
+	fe_nop:                    0
+	be_nop:                    0
+	me_nop:                    0
+	poison:                 6828
+	roll  :                  240
+	mIPC  :                  478
+
